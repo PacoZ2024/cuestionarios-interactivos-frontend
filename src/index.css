@@ -6,3 +6,5 @@
 @import url('./components/HostLobby/HostLobby.css');
 @import url('./components/Login/Login.css');
 @import url('./components/HostGame/HostGame.css');
+@import url('./components/PlayerLobby/PlayerLobby.css');
+@import url('./components/PlayerGame/PlayerGame.css');

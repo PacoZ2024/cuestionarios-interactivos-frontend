@@ -1,0 +1,191 @@
+/* Contenedor optimizado 100% para Teléfonos (Mobile-First) */
+.player-game-container {
+  height: 100vh;
+  background-color: #111827;
+  color: #ffffff;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* --- ESTADO DE VOTACIÓN (GRID GIGANTE) --- */
+.voting-layout {
+  height: 100%;
+  width: 100%;
+}
+
+.answers-button-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  height: 100%;
+  width: 100%;
+  gap: 12px;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+/* Botones de colores estilo control remoto */
+.answer-btn {
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transition:
+    transform 0.1s ease,
+    opacity 0.2s ease;
+}
+
+.answer-btn:active {
+  transform: scale(0.95);
+}
+
+.btn-red {
+  background-color: #ef4444;
+}
+.btn-blue {
+  background-color: #3b82f6;
+}
+.btn-yellow {
+  background-color: #ecc94b;
+}
+.btn-green {
+  background-color: #10b981;
+}
+
+.shape-icon {
+  font-size: 3.5rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Pantalla de bloqueo tras responder */
+.waiting-block {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  text-align: center;
+}
+
+.waiting-block h2 {
+  font-size: 1.8rem;
+  margin: 24px 0 8px 0;
+  color: #a78bfa;
+}
+
+.waiting-block p {
+  color: #9ca3af;
+  margin: 0;
+}
+
+/* --- ESTADO DE FEEDBACK (RESULTADOS COMPLETOS) --- */
+.feedback-layout {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  box-sizing: border-box;
+  animation: fadeInFeedback 0.25s ease-out;
+}
+
+/* Colores de fondo de pantalla completa según resultado */
+.bg-correct {
+  background-color: #10b981;
+}
+.bg-incorrect {
+  background-color: #ef4444;
+}
+
+.feedback-content {
+  text-align: center;
+}
+
+.feedback-emoji {
+  font-size: 5rem;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.feedback-title {
+  font-size: 3rem;
+  font-weight: 900;
+  margin: 0 0 24px 0;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Insignia de Puntaje */
+.score-badge {
+  background-color: rgba(0, 0, 0, 0.25);
+  padding: 16px 32px;
+  border-radius: 20px;
+  display: inline-block;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.score-number {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.score-label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.05em;
+}
+
+.footer-waiting-text {
+  margin-top: 40px;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+}
+
+/* Animaciones y loaders */
+.pulse-loader {
+  width: 60px;
+  height: 60px;
+  background-color: rgba(167, 139, 250, 0.2);
+  border-radius: 50%;
+  animation: pulseAnimation 1.5s infinite ease-in-out;
+}
+
+@keyframes pulseAnimation {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(0.6);
+    opacity: 0.8;
+  }
+}
+
+@keyframes fadeInFeedback {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

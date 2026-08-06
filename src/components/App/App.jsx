@@ -1,10 +1,10 @@
 import './App.css';
-import HostGame from '../HostGame/HostGame';
+import PlayerGame from '../PlayerGame/PlayerGame';
 
 function App() {
   return (
     <>
-      <HostGame />
+      <PlayerGame />
     </>
   );
 }
