@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function Inicio() {
+export default function Main() {
   const [pin, setPin] = useState('');
   const [nickname, setNickname] = useState('');
   const [step, setStep] = useState(1); // Paso 1: PIN, Paso 2: Nickname
