@@ -1,0 +1,190 @@
+/* Contenedor Principal estilo Proyección Aula */
+.lobby-container {
+  min-height: 100vh;
+  background-color: #111827; /* Fondo oscuro profundo para resaltar los nombres */
+  color: #ffffff;
+  font-family: system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Encabezado Superior */
+.lobby-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background-color: #1f2937;
+  border-bottom: 2px solid #374151;
+}
+
+.quiz-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.quiz-info h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.badge-live {
+  background-color: #ef4444;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  animation: pulse 2s infinite;
+}
+
+/* Botón Comenzar Partida */
+.btn-start-game {
+  background-color: #2563eb;
+  color: white;
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+}
+
+.btn-start-game:hover:not(:disabled) {
+  background-color: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+.btn-start-game:disabled {
+  background-color: #4b5563;
+  color: #9ca3af;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Bloque central del PIN */
+.lobby-hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(90deg, #4f46e5 0%, #7c3aed 100%);
+  padding: 40px 60px;
+}
+
+.hero-text h2 {
+  margin: 0 0 8px 0;
+  font-size: 1.4rem;
+  color: #e0e7ff;
+  font-weight: 500;
+}
+
+.pin-display {
+  font-size: 5rem;
+  font-weight: 900;
+  letter-spacing: 4px;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.counter-box {
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 20px 40px;
+  border-radius: 16px;
+  text-align: center;
+  min-width: 120px;
+}
+
+.counter-number {
+  display: block;
+  font-size: 3.5rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.counter-label {
+  font-size: 0.9rem;
+  color: #c084fc;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* Área de los nombres de alumnos */
+.lobby-players-section {
+  flex-grow: 1;
+  padding: 40px;
+}
+
+.players-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+/* Etiquetas con los Nombres */
+.player-tag {
+  background-color: #1f2937;
+  border: 2px solid #374151;
+  padding: 14px 20px;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  animation: popIn 0.3s ease-out;
+}
+
+/* Estado de Espera Vacío */
+.empty-lobby {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  color: #9ca3af;
+}
+
+.spinner {
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border-left-color: #7c3aed;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+/* Animaciones */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+@keyframes popIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

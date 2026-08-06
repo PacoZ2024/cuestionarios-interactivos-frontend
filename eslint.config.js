@@ -24,20 +24,14 @@ export default defineConfig([
     },
     rules: {
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
-      quotes: [
-        'error',
-        'single',
-        {
-          avoidEscape: true,
-          allowTemplateLiterals: true,
-        },
-      ],
+      quotes: ['error', 'single'],
+      'jsx-quotes': ['error', 'prefer-single'],
       'react/jsx-no-target-blank': 'off',
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },
       ],
-      'react/prop-types': 0,
+      'react/prop-types': 'off',
     },
   },
 ]);

@@ -1,0 +1,128 @@
+/* Contenedor Principal */
+.login-container {
+  min-height: 100vh;
+  background-color: #581c87; /* bg-purple-900 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+/* Logo Título */
+.login-logo {
+  color: #ffffff;
+  font-size: 3rem; /* text-5xl */
+  font-weight: 800; /* font-extrabold */
+  letter-spacing: 0.05em; /* tracking-wider */
+  margin-top: 0;
+  margin-bottom: 32px; /* mb-8 */
+  filter: drop-shadow(0 4px 3px rgba(0, 0, 0, 0.07))
+    drop-shadow(0 2px 2px rgba(0, 0, 0, 0.06));
+}
+
+.logo-accent {
+  color: #fbbf24; /* text-amber-400 */
+}
+
+/* Tarjeta Blanca */
+.login-card {
+  background-color: #ffffff;
+  width: 100%;
+  max-width: 448px; /* max-w-md */
+  padding: 32px; /* p-8 */
+  border-radius: 16px; /* rounded-2xl */
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); /* shadow-2xl */
+  box-sizing: border-box;
+}
+
+/* Título de la Tarjeta */
+.card-title {
+  color: #1f2937; /* text-gray-800 */
+  font-size: 1.5rem; /* text-2xl */
+  font-weight: 700; /* font-bold */
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 24px; /* mb-6 */
+}
+
+/* Formulario y Espaciados */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* space-y-5 */
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-label {
+  display: block;
+  color: #4b5563; /* text-gray-600 */
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 600; /* font-semibold */
+  margin-bottom: 8px; /* mb-2 */
+}
+
+/* Inputs de Texto */
+.form-input {
+  width: 100%;
+  padding: 12px 16px; /* px-4 py-3 */
+  background-color: #f9fafb; /* bg-gray-50 */
+  border: 1px solid #d1d5db; /* border-gray-300 */
+  border-radius: 12px; /* rounded-xl */
+  font-size: 1rem;
+  color: #1f2937; /* text-gray-800 */
+  outline: none;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.form-input:focus {
+  border-color: #9333ea; /* focus:ring-purple-600 */
+  box-shadow: 0 0 0 2px #9333ea;
+}
+
+/* Botón de Envío */
+.form-button {
+  width: 100%;
+  background-color: #9333ea; /* bg-purple-600 */
+  color: #ffffff;
+  font-weight: 700; /* font-bold */
+  font-size: 1.125rem; /* text-lg */
+  padding: 14px 16px; /* py-3.5 px-4 */
+  border: none;
+  border-radius: 12px; /* rounded-xl */
+  cursor: pointer;
+  box-shadow: 0 10px 15px -3px rgba(147, 51, 234, 0.3); /* shadow-lg */
+  transition: all 0.2s ease;
+}
+
+.form-button:hover {
+  background-color: #7e22ce; /* hover:bg-purple-700 */
+}
+
+.form-button:active {
+  transform: scale(0.95); /* active:scale-95 */
+}
+
+/* Enlaces Inferiores */
+.card-footer {
+  margin-top: 24px; /* mt-6 */
+  text-align: center;
+  font-size: 0.875rem; /* text-sm */
+  color: #6b7280; /* text-gray-500 */
+}
+
+.footer-link {
+  color: #9333ea; /* text-purple-600 */
+  font-weight: 600; /* font-semibold */
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+}

@@ -1,5 +1,177 @@
-.main {
-  max-width: 880px;
-  margin: 0 auto;
-  padding-bottom: 67px;
+.home-container {
+  min-height: 100vh;
+  background: linear-gradient(
+    135deg,
+    #4c1d95 0%,
+    #2563eb 100%
+  ); /* Degradado Púrpura a Azul */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  box-sizing: border-box;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+}
+
+/* Identidad Visual (Logo) */
+.home-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.home-logo {
+  color: #ffffff;
+  font-size: 3.5rem;
+  font-weight: 900;
+  margin: 0;
+  letter-spacing: -0.03em;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.logo-accent {
+  color: #f59e0b; /* Color Ámbar / Dorado */
+}
+
+.home-subtitle {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1rem;
+  margin-top: 8px;
+  margin-bottom: 0;
+  font-weight: 500;
+}
+
+/* Tarjeta de Entrada */
+.home-card {
+  background-color: #ffffff;
+  width: 100%;
+  max-width: 360px; /* Tamaño ideal compacto tipo smartphone */
+  padding: 24px;
+  border-radius: 20px;
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.25),
+    0 10px 10px -5px rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+}
+
+.home-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Inputs (PIN y Nickname) */
+.input-pin,
+.input-nickname {
+  width: 100%;
+  padding: 16px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-align: center;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  background-color: #f9fafb;
+  color: #1f2937;
+  outline: none;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.input-pin {
+  letter-spacing: 0.2em; /* Espaciado para simular un código secreto */
+}
+
+.input-pin::placeholder {
+  letter-spacing: normal;
+  font-weight: 500;
+}
+
+.input-pin:focus,
+.input-nickname:focus {
+  border-color: #3b82f6;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+}
+
+/* Botones de Acción */
+.btn-primary,
+.btn-success {
+  width: 100%;
+  padding: 16px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  color: #ffffff;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary {
+  background-color: #111827; /* Botón oscuro elegante */
+}
+
+.btn-primary:hover {
+  background-color: #1f2937;
+}
+
+.btn-success {
+  background-color: #10b981; /* Botón verde de éxito */
+}
+
+.btn-success:hover {
+  background-color: #059669;
+}
+
+.btn-primary:active,
+.btn-success:active {
+  transform: scale(0.98);
+}
+
+/* Badge que recuerda el PIN ingresado */
+.pin-entered-badge {
+  margin: 0;
+  text-align: center;
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 600;
+  background-color: #f3f4f6;
+  padding: 6px;
+  border-radius: 6px;
+}
+
+/* Sección Footer (Profesores) */
+.home-footer {
+  margin-top: 40px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.95rem;
+}
+
+.home-footer p {
+  margin: 0 0 8px 0;
+}
+
+.btn-teacher-link {
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+  background-color: rgba(255, 255, 255, 0.15);
+  padding: 10px 20px;
+  border-radius: 30px;
+  display: inline-block;
+  backdrop-filter: blur(4px);
+  transition: all 0.2s ease;
+}
+
+.btn-teacher-link:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
 }

@@ -1,9 +1,10 @@
 import './App.css';
+import HostGame from '../HostGame/HostGame';
 
 function App() {
   return (
     <>
-      <div className="app">Hola a todos, si funciona esto correctamente</div>
+      <HostGame />
     </>
   );
 }

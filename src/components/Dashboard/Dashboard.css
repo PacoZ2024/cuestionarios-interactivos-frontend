@@ -1,0 +1,360 @@
+/* Layout General Dashboard */
+.dash-container {
+  display: flex;
+  height: 100vh;
+  background-color: #f3f4f6;
+  font-family: system-ui, sans-serif;
+  overflow: hidden;
+}
+
+/* Barra Lateral (Sidebar) */
+.dash-sidebar {
+  width: 260px;
+  background-color: #1f2937;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 16px;
+  box-sizing: border-box;
+}
+
+.dash-logo {
+  font-size: 1.8rem;
+  font-weight: 900;
+  margin: 0 0 32px 0;
+  text-align: center;
+}
+
+.dash-logo span {
+  color: #f59e0b;
+}
+
+.dash-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-grow: 1;
+}
+
+.menu-btn {
+  background: none;
+  border: none;
+  color: #9ca3af;
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.menu-btn:hover,
+.menu-btn.active {
+  background-color: #374151;
+  color: #ffffff;
+}
+
+/* Contenedor inferior de la barra lateral */
+.sidebar-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-top: 1px solid #374151; /* Línea divisoria sutil */
+  padding-top: 16px;
+}
+
+.user-role {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #6b7280;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Botón de Cerrar Sesión con estilo de advertencia suave */
+.btn-logout {
+  width: 100%;
+  background-color: transparent;
+  color: #fca5a5; /* Color rojo pastel para avisar peligro de forma elegante */
+  border: 1px solid rgba(252, 165, 165, 0.2);
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.btn-logout:hover {
+  background-color: #ef4444; /* Fondo rojo intenso en hover */
+  color: #ffffff; /* Texto blanco */
+  border-color: #ef4444;
+}
+
+.btn-logout:active {
+  transform: scale(0.98);
+}
+
+/* Área de Contenido Principal */
+.dash-content {
+  flex-grow: 1;
+  padding: 40px;
+  box-sizing: border-box;
+  height: 100%; /* Obliga al contenedor a respetar el alto de la pantalla */
+  overflow-y: overlay; /* En navegadores modernos dibuja el scroll por encima sin romper el diseño */
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.section-header h1 {
+  margin: 0;
+  font-size: 2rem;
+  color: #111827;
+}
+
+/* Grid de Tarjetas de Quizzes */
+.quiz-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.quiz-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
+}
+
+.quiz-card-info h3 {
+  margin: 0 0 8px 0;
+  color: #1f2937;
+}
+
+.quiz-card-info p {
+  margin: 0;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.quiz-card-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+/* Formularios y Creador */
+.quiz-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.form-group-title {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group-title label {
+  font-weight: 700;
+  color: #374151;
+}
+
+.form-group-title input {
+  padding: 14px;
+  font-size: 1.1rem;
+  border: 2px solid #d1d5db;
+  border-radius: 8px;
+  outline: none;
+}
+
+.form-group-title input:focus {
+  border-color: #4f46e5;
+}
+
+/* Cartas de Preguntas */
+.question-editor-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.question-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.question-card-header h4 {
+  margin: 0 !important;
+  color: #4f46e5;
+}
+
+.input-question-text {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+}
+
+/* Retícula de Opciones de Respuesta */
+.options-grid-editor {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.option-editor-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
+
+/* Colores Distintivos Estilo Trivia */
+.color-0 {
+  background-color: #fef2f2;
+  border-left: 6px solid #ef4444;
+}
+.color-1 {
+  background-color: #eff6ff;
+  border-left: 6px solid #3b82f6;
+}
+.color-2 {
+  background-color: #fefcbf;
+  border-left: 6px solid #ecc94b;
+}
+.color-3 {
+  background-color: #ecfdf5;
+  border-left: 6px solid #10b981;
+}
+
+.input-option-text {
+  flex-grow: 1;
+  padding: 8px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+/* Botonería Estilizada */
+.btn-create-header,
+.btn-save-quiz {
+  background-color: #4f46e5;
+  color: #ffffff;
+  font-weight: 700;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-create-header:hover,
+.btn-save-quiz:hover {
+  background-color: #4338ca;
+}
+
+.btn-launch {
+  background-color: #10b981;
+  color: #ffffff;
+  font-weight: 700;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  flex-grow: 2;
+  transition: background 0.2s ease;
+}
+
+.btn-launch:hover {
+  background-color: #059669;
+}
+
+.btn-delete-quiz {
+  background-color: #fee2e2;
+  color: #dc2626;
+  font-weight: 600;
+  padding: 10px 14px;
+  border: 1px solid #fca5a5;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-delete-quiz:hover {
+  background-color: #fca5a5;
+  color: #991b1b;
+}
+
+.btn-delete-question {
+  background: none;
+  border: none;
+  color: #ef4444;
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.15s ease;
+}
+
+.btn-delete-question:hover {
+  background-color: #fee2e2;
+  text-decoration: underline;
+}
+
+.btn-add-question {
+  background-color: #e5e7eb;
+  color: #374151;
+  font-weight: 700;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-add-question:hover {
+  background-color: #d1d5db;
+}
+
+.btn-cancel {
+  background-color: transparent;
+  color: #4b5563;
+  font-weight: 600;
+  border: 1px solid #d1d5db;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.form-submit-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+}
