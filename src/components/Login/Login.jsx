@@ -1,63 +1,87 @@
 import { useState } from 'react';
 
 export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({ email, password });
+    setError('');
+    setLoading(true);
+
+    try {
+      // Aquí realizarás el fetch hacia tu endpoint (ej: /api/auth/login)
+      console.log('Iniciando sesión con:', formData);
+
+      // Simulación de autenticación exitosa
+      setTimeout(() => {
+        setLoading(false);
+        // Aquí guardarías el token JWT en localStorage y redirigirías al /dashboard
+        alert('¡Inicio de sesión correcto! Redirigiendo...');
+      }, 1200);
+    } catch (err) {
+      setError('Credenciales incorrectas o el usuario no existe.');
+      setLoading(false);
+    }
   };
 
   return (
     <div className='login-container'>
-      {/* Logo / Título */}
-      <h1 className='login-logo'>
-        Klon<span className='logo-accent'>oot!</span>
-      </h1>
-
-      {/* Tarjeta de Login */}
       <div className='login-card'>
-        <h2 className='card-title'>Panel de Creador</h2>
+        <div className='login-header'>
+          <h2 className='login-logo'>
+            Klon<span>oot!</span>
+          </h2>
+          <p className='login-subtitle'>Ingresa a tu panel de Profesor</p>
+        </div>
+
+        {error && <div className='login-error-msg'>{error}</div>}
 
         <form onSubmit={handleSubmit} className='login-form'>
-          {/* Email */}
-          <div className='form-group'>
-            <label className='form-label'>Correo Electrónico</label>
+          <div className='form-field'>
+            <label>Correo Electrónico</label>
             <input
               type='email'
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder='ejemplo@correo.com'
-              className='form-input'
+              name='email'
+              value={formData.email}
+              onChange={handleChange}
+              placeholder='correo@institucion.com'
               required
             />
           </div>
 
-          {/* Contraseña */}
-          <div className='form-group'>
-            <label className='form-label'>Contraseña</label>
+          <div className='form-field'>
+            <label>Contraseña</label>
             <input
               type='password'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder='••••••••'
-              className='form-input'
+              name='password'
+              value={formData.password}
+              onChange={handleChange}
+              placeholder='Introduce tu contraseña'
               required
             />
           </div>
 
-          {/* Botón de Ingreso */}
-          <button type='submit' className='form-button'>
-            Iniciar Sesión
+          <button type='submit' className='btn-login-submit' disabled={loading}>
+            {loading ? 'Verificando...' : 'Iniciar Sesión'}
           </button>
         </form>
 
-        {/* Links de ayuda */}
-        <div className='card-footer'>
-          ¿No tienes cuenta?{' '}
-          <a href='#register' className='footer-link'>
-            Regístrate aquí
+        <div className='login-footer'>
+          ¿Aún no tienes cuenta?{' '}
+          <a href='/register' className='register-link'>
+            Regístrate como docente
           </a>
         </div>
       </div>
