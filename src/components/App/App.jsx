@@ -18,12 +18,6 @@ export default function App() {
         {/* Pantalla de inicio para ingresar el PIN */}
         <Route path='/' element={<Main />} />
 
-        {/* Pantalla de autenticación para el ingreso del profesor */}
-        <Route path='/login' element={<Login />} />
-
-        {/* Pantalla de registro para el profesor */}
-        <Route path='/register' element={<Register />} />
-
         {/* Sala de espera del alumno (esperando al profesor) */}
         <Route path='/player/lobby' element={<PlayerLobby />} />
 
@@ -31,6 +25,12 @@ export default function App() {
         <Route path='/player/game' element={<PlayerGame />} />
 
         {/* --- RUTAS DEL PROFESOR (HOST) --- */}
+        {/* Pantalla de autenticación para el ingreso del profesor */}
+        <Route path='/login' element={<Login />} />
+
+        {/* Pantalla de registro para el profesor */}
+        <Route path='/register' element={<Register />} />
+
         {/* Panel de administración y creador de quizzes */}
         <Route path='/dashboard' element={<Dashboard />} />
 
