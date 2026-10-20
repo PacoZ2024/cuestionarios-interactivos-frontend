@@ -1,6 +1,6 @@
 const BASE_URL =
-  process.env.NODE_ENV === 'production'
-    ? 'https://api.around-the-us-2025.mooo.com'
+  import.meta.env.MODE === 'production'
+    ? 'http://localhost:3001'
     : 'http://localhost:3001';
 
 export async function register(username, email, password) {

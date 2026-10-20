@@ -61,7 +61,7 @@ class Api {
 const api = new Api({
   baseUrl:
     import.meta.env.MODE === 'production'
-      ? 'https://tu-kahoot-produccion.com'
+      ? 'http://localhost:3001/'
       : 'http://localhost:3001/',
   headers: {
     'Content-Type': 'application/json',

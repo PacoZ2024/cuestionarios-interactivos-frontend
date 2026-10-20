@@ -1,14 +1,31 @@
 import { useState } from 'react';
+import * as auth from '../../utils/auth';
 
 export default function Register() {
   const [formData, setFormData] = useState({
-    name: '',
+    username: '',
     email: '',
     password: '',
     confirmPassword: '',
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+
+  async function handleRegister({ username, email, password }) {
+    await auth
+      .register(username, email, password)
+      .then(() => {
+        setTimeout(() => {
+          setLoading(false);
+          alert('¡Registro exitoso! Ya puedes iniciar sesión.');
+        }, 1500);
+      })
+      .catch((err) => {
+        setError('Hubo un problema con el servidor. Inténtalo de nuevo.');
+        setLoading(false);
+        console.error(err);
+      });
+  }
 
   const handleChange = (e) => {
     setFormData({
@@ -27,26 +44,18 @@ export default function Register() {
       return;
     }
 
-    if (formData.password.length < 6) {
-      setError('La contraseña debe tener al menos 6 caracteres.');
+    if (formData.password.length < 8) {
+      setError('La contraseña debe tener al menos 8 caracteres.');
       return;
     }
 
     setLoading(true);
 
-    try {
-      // Aquí harás tu llamada fetch al backend (ej: /api/auth/register)
-      console.log('Enviando datos al backend:', formData);
-
-      // Simulación de éxito
-      setTimeout(() => {
-        setLoading(false);
-        alert('¡Registro exitoso! Ya puedes iniciar sesión.');
-      }, 1500);
-    } catch (err) {
-      setError('Hubo un problema con el servidor. Inténtalo de nuevo.');
-      setLoading(false);
-    }
+    handleRegister({
+      username: formData.username,
+      email: formData.email,
+      password: formData.password,
+    });
   };
 
   return (
@@ -66,8 +75,8 @@ export default function Register() {
             <label>Nombre Completo</label>
             <input
               type='text'
-              name='name'
-              value={formData.name}
+              name='username'
+              value={formData.username}
               onChange={handleChange}
               placeholder='Ej: Profe Juan Pérez'
               required
@@ -93,7 +102,7 @@ export default function Register() {
               name='password'
               value={formData.password}
               onChange={handleChange}
-              placeholder='Mínimo 6 caracteres'
+              placeholder='Mínimo 8 caracteres'
               required
             />
           </div>

@@ -10,7 +10,7 @@ export function SocketProvider({ children }) {
 
   useEffect(() => {
     // Reemplaza con la URL de tu servidor Express/Node
-    const newSocket = io('http://localhost:5000', {
+    const newSocket = io('http://localhost:3001', {
       autoConnect: true,
     });
 
