@@ -1,4 +1,8 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import * as auth from '../../utils/auth';
+import { api } from '../../utils/api';
+import { setTokenLocalStorage } from '../../utils/token';
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -7,6 +11,33 @@ export default function Login() {
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  async function handleLogin({ email, password }) {
+    if (!email || !password) {
+      return;
+    }
+
+    await auth
+      .authorize(email, password)
+      .then((data) => {
+        if (data.token) {
+          setTimeout(() => {
+            setLoading(false);
+            api.addAuthorizationToHeader(data.token);
+            setTokenLocalStorage(data.token);
+            const redirectPath = location.state?.from?.pathname || '/dashboard';
+            navigate(redirectPath);
+            alert('¡Inicio de sesión correcto! Redirigiendo...');
+          }, 1200);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        setError('Credenciales incorrectas o el usuario no existe.');
+        setLoading(false);
+      });
+  }
 
   const handleChange = (e) => {
     setFormData({
@@ -20,20 +51,7 @@ export default function Login() {
     setError('');
     setLoading(true);
 
-    try {
-      // Aquí realizarás el fetch hacia tu endpoint (ej: /api/auth/login)
-      console.log('Iniciando sesión con:', formData);
-
-      // Simulación de autenticación exitosa
-      setTimeout(() => {
-        setLoading(false);
-        // Aquí guardarías el token JWT en localStorage y redirigirías al /dashboard
-        alert('¡Inicio de sesión correcto! Redirigiendo...');
-      }, 1200);
-    } catch (err) {
-      setError('Credenciales incorrectas o el usuario no existe.');
-      setLoading(false);
-    }
+    handleLogin(formData);
   };
 
   return (
