@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { SocketProvider } from '../../context/SocketContext';
 
@@ -10,7 +11,22 @@ import PlayerGame from '../PlayerGame/PlayerGame';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 
+import { api } from '../../utils/api';
+
 export default function App() {
+  const [savedQuizzes, setSavedQuizzes] = useState([]);
+
+  async function handleSaveQuizzes(quiz) {
+    await api
+      .saveQuiz(quiz)
+      .then((savedQuiz) => {
+        setSavedQuizzes([...savedQuizzes, savedQuiz]);
+      })
+      .catch((err) => {
+        console.error('Error al guardar el cuestionario:', err);
+      });
+  }
+
   return (
     <SocketProvider>
       <Routes>
@@ -32,7 +48,15 @@ export default function App() {
         <Route path='/register' element={<Register />} />
 
         {/* Panel de administración y creador de quizzes */}
-        <Route path='/dashboard' element={<Dashboard />} />
+        <Route
+          path='/dashboard'
+          element={
+            <Dashboard
+              onSaveQuizzes={handleSaveQuizzes}
+              savedQuizzes={savedQuizzes}
+            />
+          }
+        />
 
         {/* Proyector: Sala de espera con el PIN gigante */}
         <Route path='/host/lobby' element={<HostLobby />} />

@@ -28,6 +28,10 @@ class Api {
     };
   }
 
+  saveQuiz(quiz) {
+    return this._request('quizzes', 'POST', quiz);
+  }
+
   // 1. Obtener la lista de cuestionarios disponibles creados por el usuario (Panel inicial)
   getQuizzes() {
     return this._request('quizzes');

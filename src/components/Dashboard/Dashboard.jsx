@@ -1,27 +1,8 @@
 import { useState } from 'react';
 
-export default function Dashboard() {
+export default function Dashboard({ onSaveQuizzes, savedQuizzes }) {
   const [view, setView] = useState('list'); // 'list', 'create' o 'edit'
   const [editingQuizId, setEditingQuizId] = useState(null); // ID del quiz en edición
-  const [quizzes, setQuizzes] = useState([
-    { 
-      id: '1', 
-      title: 'Historia Universal 101', 
-      questionsCount: 2,
-      questions: [
-        { questionText: '¿En qué año comenzó la Segunda Guerra Mundial?', options: ['1939', '1945', '1914', '1989'], correctAnswer: 0 },
-        { questionText: '¿Quién pintó la Mona Lisa?', options: ['Van Gogh', 'Da Vinci', 'Picasso', 'Monet'], correctAnswer: 1 }
-      ]
-    },
-    { 
-      id: '2', 
-      title: 'Quiz de Programación MERN', 
-      questionsCount: 1,
-      questions: [
-        { questionText: '¿Qué significa la M en MERN?', options: ['MySQL', 'MongoDB', 'Mongoose', 'Meteor'], correctAnswer: 1 }
-      ]
-    },
-  ]);
 
   // Estados del Formulario (Compartidos entre Creación y Edición)
   const [quizTitle, setQuizTitle] = useState('');
@@ -33,7 +14,9 @@ export default function Dashboard() {
   const handleOpenCreateMode = () => {
     setEditingQuizId(null);
     setQuizTitle('');
-    setQuestions([{ questionText: '', options: ['', '', '', ''], correctAnswer: 0 }]);
+    setQuestions([
+      { questionText: '', options: ['', '', '', ''], correctAnswer: 0 },
+    ]);
     setView('create');
   };
 
@@ -41,14 +24,24 @@ export default function Dashboard() {
     setEditingQuizId(quiz.id);
     setQuizTitle(quiz.title);
     // Clonamos las preguntas para evitar mutaciones directas en el estado
-    setQuestions(JSON.parse(JSON.stringify(quiz.questions || [{ questionText: '', options: ['', '', '', ''], correctAnswer: 0 }])));
+    setQuestions(
+      JSON.parse(
+        JSON.stringify(
+          quiz.questions || [
+            { questionText: '', options: ['', '', '', ''], correctAnswer: 0 },
+          ],
+        ),
+      ),
+    );
     setView('edit');
   };
 
   // --- LÓGICA DE ELIMINACIÓN ---
   const handleDeleteQuiz = (id) => {
-    if (window.confirm('¿Estás seguro de que deseas eliminar este cuestionario?')) {
-      setQuizzes(quizzes.filter((quiz) => quiz.id !== id));
+    if (
+      window.confirm('¿Estás seguro de que deseas eliminar este cuestionario?')
+    ) {
+      onSaveQuizzes(savedQuizzes.filter((quiz) => quiz.id !== id));
     }
   };
 
@@ -92,31 +85,33 @@ export default function Dashboard() {
 
     if (view === 'edit' && editingQuizId) {
       // Modo Edición: Actualizar cuestionario existente
-      setQuizzes(quizzes.map((quiz) => {
-        if (quiz.id === editingQuizId) {
-          return {
-            ...quiz,
-            title: quizTitle,
-            questionsCount: questions.length,
-            questions: questions
-          };
-        }
-        return quiz;
-      }));
+      onSaveQuizzes(
+        savedQuizzes.map((quiz) => {
+          if (quiz.id === editingQuizId) {
+            return {
+              ...quiz,
+              title: quizTitle,
+              questionsCount: questions.length,
+              questions: questions,
+            };
+          }
+          return quiz;
+        }),
+      );
     } else {
       // Modo Creación: Añadir nuevo cuestionario
       const newQuiz = {
-        id: Date.now().toString(),
         title: quizTitle,
-        questionsCount: questions.length,
-        questions: questions
+        questions: questions,
       };
-      setQuizzes([...quizzes, newQuiz]);
+      onSaveQuizzes(newQuiz);
     }
 
     // Limpieza de estados y regreso a la lista
     setQuizTitle('');
-    setQuestions([{ questionText: '', options: ['', '', '', ''], correctAnswer: 0 }]);
+    setQuestions([
+      { questionText: '', options: ['', '', '', ''], correctAnswer: 0 },
+    ]);
     setEditingQuizId(null);
     setView('list');
   };
@@ -177,7 +172,7 @@ export default function Dashboard() {
             </div>
 
             <div className='quiz-grid'>
-              {quizzes.map((quiz) => (
+              {savedQuizzes.map((quiz) => (
                 <div key={quiz.id} className='quiz-card'>
                   <div className='quiz-card-info'>
                     <h3>{quiz.title}</h3>
@@ -211,7 +206,11 @@ export default function Dashboard() {
           /* VISTA: FORMULARIO CREADOR / EDITOR DE QUIZ */
           <section className='view-section'>
             <div className='section-header'>
-              <h1>{view === 'edit' ? 'Editar Cuestionario' : 'Crear Nuevo Cuestionario'}</h1>
+              <h1>
+                {view === 'edit'
+                  ? 'Editar Cuestionario'
+                  : 'Crear Nuevo Cuestionario'}
+              </h1>
               <button className='btn-cancel' onClick={() => setView('list')}>
                 Cancelar
               </button>
@@ -246,7 +245,9 @@ export default function Dashboard() {
                     <input
                       type='text'
                       value={q.questionText}
-                      onChange={(e) => handleQuestionChange(qIndex, e.target.value)}
+                      onChange={(e) =>
+                        handleQuestionChange(qIndex, e.target.value)
+                      }
                       placeholder='Escribe el enunciado de la pregunta aquí...'
                       className='input-question-text'
                       required
@@ -254,18 +255,25 @@ export default function Dashboard() {
 
                     <div className='options-grid-editor'>
                       {q.options.map((option, oIndex) => (
-                        <div key={oIndex} className={`option-editor-box color-${oIndex}`}>
+                        <div
+                          key={oIndex}
+                          className={`option-editor-box color-${oIndex}`}
+                        >
                           <input
                             type='radio'
                             name={`correct-${qIndex}`}
                             checked={q.correctAnswer === oIndex}
-                            onChange={() => handleCorrectAnswerChange(qIndex, oIndex)}
+                            onChange={() =>
+                              handleCorrectAnswerChange(qIndex, oIndex)
+                            }
                             title='Marcar como respuesta correcta'
                           />
                           <input
                             type='text'
                             value={option}
-                            onChange={(e) => handleOptionChange(qIndex, oIndex, e.target.value)}
+                            onChange={(e) =>
+                              handleOptionChange(qIndex, oIndex, e.target.value)
+                            }
                             placeholder={`Opción ${oIndex + 1}`}
                             className='input-option-text'
                             required
@@ -286,7 +294,9 @@ export default function Dashboard() {
                   + Añadir otra pregunta
                 </button>
                 <button type='submit' className='btn-save-quiz'>
-                  {view === 'edit' ? 'Guardar Cambios' : 'Guardar Cuestionario Completo'}
+                  {view === 'edit'
+                    ? 'Guardar Cambios'
+                    : 'Guardar Cuestionario Completo'}
                 </button>
               </div>
             </form>
