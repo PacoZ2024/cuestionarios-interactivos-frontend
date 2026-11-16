@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function Dashboard({ onSaveQuizzes, savedQuizzes }) {
+export default function Dashboard({ onSaveQuizzes, savedQuizzes, onSignOut }) {
   const [view, setView] = useState('list'); // 'list', 'create' o 'edit'
   const [editingQuizId, setEditingQuizId] = useState(null); // ID del quiz en edición
 
@@ -122,7 +122,7 @@ export default function Dashboard({ onSaveQuizzes, savedQuizzes }) {
 
   const handleLogout = () => {
     if (window.confirm('¿Quieres cerrar sesión?')) {
-      window.location.href = '/login';
+      onSignOut();
     }
   };
 

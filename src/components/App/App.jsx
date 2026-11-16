@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { SocketProvider } from '../../context/SocketContext';
 
 import Main from '../Main/Main';
@@ -12,9 +12,16 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 
 import { api } from '../../utils/api';
+import {
+  getTokenLocalStorage,
+  removeTokenLocalStorage,
+} from '../../utils/token';
+import * as auth from '../../utils/auth';
 
 export default function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [savedQuizzes, setSavedQuizzes] = useState([]);
+  const navigate = useNavigate();
 
   async function handleSaveQuizzes(quiz) {
     await api
@@ -26,6 +33,48 @@ export default function App() {
         console.error('Error al guardar el cuestionario:', err);
       });
   }
+
+  function handleSignOut() {
+    removeTokenLocalStorage();
+    setIsLoggedIn(false);
+    setSavedQuizzes([]);
+    navigate('/');
+  }
+
+  useEffect(() => {
+    const token = getTokenLocalStorage();
+
+    if (!token) {
+      return;
+    }
+
+    (async () => {
+      await auth
+        .checkToken(token)
+        .then((data) => {
+          console.log(data);
+          api.addAuthorizationToHeader(token);
+          setIsLoggedIn(true);
+        })
+        .catch((err) => {
+          removeTokenLocalStorage();
+          setIsLoggedIn(false);
+          console.error('Token inválido:', err);
+        });
+    })();
+  }, []);
+
+  useEffect(() => {
+    if (isLoggedIn)
+      (async () => {
+        await api
+          .getQuizzes()
+          .then((data) => {
+            setSavedQuizzes(data);
+          })
+          .catch((err) => console.error(err));
+      })();
+  }, [isLoggedIn]);
 
   return (
     <SocketProvider>
@@ -54,6 +103,7 @@ export default function App() {
             <Dashboard
               onSaveQuizzes={handleSaveQuizzes}
               savedQuizzes={savedQuizzes}
+              onSignOut={handleSignOut}
             />
           }
         />
