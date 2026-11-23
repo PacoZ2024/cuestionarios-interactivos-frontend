@@ -53,7 +53,19 @@ export default function App() {
         );
       })
       .catch((err) => {
-        console.error('Error al guardar el cuestionario:', err);
+        console.error('Error al actualizar el cuestionario:', err);
+      });
+  }
+
+  async function handleDeleteQuizzes(quizId) {
+    await api
+      .deleteQuiz(quizId)
+      .then((response) => {
+        const { data } = response;
+        setSavedQuizzes(savedQuizzes.filter((quiz) => quiz._id !== data._id));
+      })
+      .catch((err) => {
+        console.error('Error al eliminar el cuestionario:', err);
       });
   }
 
@@ -126,6 +138,7 @@ export default function App() {
             <Dashboard
               onSaveQuizzes={handleSaveQuizzes}
               onUpdateQuizzes={handleUpdateQuizzes}
+              onDeleteQuizzes={handleDeleteQuizzes}
               savedQuizzes={savedQuizzes}
               onSignOut={handleSignOut}
             />

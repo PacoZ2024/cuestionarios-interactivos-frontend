@@ -41,6 +41,10 @@ class Api {
     return this._request(`quizzes/${quizId}`, 'PATCH', quiz);
   }
 
+  deleteQuiz(quizId) {
+    return this._request(`quizzes/${quizId}`, 'DELETE');
+  }
+
   // 2. Crear una nueva sala/partida de juego a partir de un cuestionario (Host/Profesor)
   crearPartida(quizId) {
     return this._request('partidas', 'POST', { quizId });

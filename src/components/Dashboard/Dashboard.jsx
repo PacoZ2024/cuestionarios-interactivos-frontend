@@ -3,6 +3,7 @@ import { useState } from 'react';
 export default function Dashboard({
   onSaveQuizzes,
   onUpdateQuizzes,
+  onDeleteQuizzes,
   savedQuizzes,
   onSignOut,
 }) {
@@ -46,7 +47,7 @@ export default function Dashboard({
     if (
       window.confirm('¿Estás seguro de que deseas eliminar este cuestionario?')
     ) {
-      onSaveQuizzes(savedQuizzes.filter((quiz) => quiz.id !== id));
+      onDeleteQuizzes(id);
     }
   };
 
@@ -169,7 +170,7 @@ export default function Dashboard({
 
             <div className='quiz-grid'>
               {savedQuizzes.map((quiz) => (
-                <div key={quiz.id} className='quiz-card'>
+                <div key={quiz._id} className='quiz-card'>
                   <div className='quiz-card-info'>
                     <h3>{quiz.title}</h3>
                     <p>{quiz.questionsCount} Preguntas</p>
@@ -189,7 +190,7 @@ export default function Dashboard({
                     </button>
                     <button
                       className='btn-delete-quiz'
-                      onClick={() => handleDeleteQuiz(quiz.id)}
+                      onClick={() => handleDeleteQuiz(quiz._id)}
                     >
                       🗑️
                     </button>
