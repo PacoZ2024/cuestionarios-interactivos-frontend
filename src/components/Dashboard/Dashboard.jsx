@@ -1,6 +1,11 @@
 import { useState } from 'react';
 
-export default function Dashboard({ onSaveQuizzes, savedQuizzes, onSignOut }) {
+export default function Dashboard({
+  onSaveQuizzes,
+  onUpdateQuizzes,
+  savedQuizzes,
+  onSignOut,
+}) {
   const [view, setView] = useState('list'); // 'list', 'create' o 'edit'
   const [editingQuizId, setEditingQuizId] = useState(null); // ID del quiz en edición
 
@@ -21,7 +26,7 @@ export default function Dashboard({ onSaveQuizzes, savedQuizzes, onSignOut }) {
   };
 
   const handleOpenEditMode = (quiz) => {
-    setEditingQuizId(quiz.id);
+    setEditingQuizId(quiz._id);
     setQuizTitle(quiz.title);
     // Clonamos las preguntas para evitar mutaciones directas en el estado
     setQuestions(
@@ -85,19 +90,10 @@ export default function Dashboard({ onSaveQuizzes, savedQuizzes, onSignOut }) {
 
     if (view === 'edit' && editingQuizId) {
       // Modo Edición: Actualizar cuestionario existente
-      onSaveQuizzes(
-        savedQuizzes.map((quiz) => {
-          if (quiz.id === editingQuizId) {
-            return {
-              ...quiz,
-              title: quizTitle,
-              questionsCount: questions.length,
-              questions: questions,
-            };
-          }
-          return quiz;
-        }),
-      );
+      onUpdateQuizzes(editingQuizId, {
+        title: quizTitle,
+        questions: questions,
+      });
     } else {
       // Modo Creación: Añadir nuevo cuestionario
       const newQuiz = {

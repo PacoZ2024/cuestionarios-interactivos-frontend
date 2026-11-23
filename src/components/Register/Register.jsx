@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as auth from '../../utils/auth';
 
 export default function Register() {
@@ -10,6 +11,7 @@ export default function Register() {
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   async function handleRegister({ username, email, password }) {
     await auth
@@ -18,6 +20,7 @@ export default function Register() {
         setTimeout(() => {
           setLoading(false);
           alert('¡Registro exitoso! Ya puedes iniciar sesión.');
+          navigate('/login');
         }, 1500);
       })
       .catch((err) => {

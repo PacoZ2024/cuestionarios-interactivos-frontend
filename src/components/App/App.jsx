@@ -34,6 +34,29 @@ export default function App() {
       });
   }
 
+  async function handleUpdateQuizzes(quizId, quiz) {
+    await api
+      .updateQuiz(quizId, quiz)
+      .then((updateQuiz) => {
+        const editingQuizId = updateQuiz._id;
+        setSavedQuizzes(
+          savedQuizzes.map((quiz) => {
+            if (quiz._id?.toString() === editingQuizId?.toString()) {
+              return {
+                ...quiz,
+                title: updateQuiz.title,
+                questions: updateQuiz.questions,
+              };
+            }
+            return quiz;
+          }),
+        );
+      })
+      .catch((err) => {
+        console.error('Error al guardar el cuestionario:', err);
+      });
+  }
+
   function handleSignOut() {
     removeTokenLocalStorage();
     setIsLoggedIn(false);
@@ -102,6 +125,7 @@ export default function App() {
           element={
             <Dashboard
               onSaveQuizzes={handleSaveQuizzes}
+              onUpdateQuizzes={handleUpdateQuizzes}
               savedQuizzes={savedQuizzes}
               onSignOut={handleSignOut}
             />
